@@ -1,0 +1,102 @@
+3. USE keyword is used to select a_____
+	
+	USE keyword is used to select a Database
+
+4. User() fucntion returns the current users user name and
+	
+	User() fucntion returns the current users user name and Host name.
+
+5. How do I find out all databases starting with ‘test‘?
+	
+	SHOW DATABASES LIKE 'test%';
+
+6. How can we get the number of records or rows in a table?
+	
+	SELECT COUNT(*) FROM Table_Name
+
+8. Write an SQL query to print the FIRST_NAME from Worker table after replacing ‘a’ with ‘A’
+	
+	SELECT REPLACE(FIRST_MAME, 'a','A')FROM Worker;
+
+9. Write an SQL query to print all Worker details from the Worker table order by FIRST_NAME Ascending and DEPARTMENT Descending.
+
+	SELECT*FROM Worker ORDER BY FIRST_NAME ASC, DEPARTMENT DESC;
+
+10. Write an SQL query to print details of workers excluding first names, “Vipul” and “Satish” from Worker table
+
+	SELECT*FROM Worker WHERE FIRST_NAME NOT IN("Vipul,"Sathish");
+
+11. Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘h’ and contains six alphabets
+
+	SELECT*FROM Worker WHERE FIRST_NAME LIKE '_____h';
+
+13. Write a query find number of employees whose DOB is between 02/05/1970 to 31/12/1975 and are grouped according to gender
+
+	SELECT COUNT(*) Gender FROM EmployeeInfo WHERE DOB BETWEEN '02/05/1970' AND '31/12/1975' GROUP BY Gender;
+
+14. Write a query to fetch all employees who also hold the managerial position
+
+	SELECT E.EmpFname, E.EmpLname, P.EmpPosition
+	FROM EmployeeInfo E INNER JOIN EmployeePosition P ON
+	E.EmpID = P.EmpID AND P.EmpPosition IN ('Manager');
+
+15. Write a query to retrieve two minimum and maximum salaries from the EmployeePosition table
+
+	SELECT TOP 2 Salary
+	FROM EmployeePosition ORDER BY Salary DESC;
+
+	SELECT TOP 2 Salary
+	FROM EmployeePosition ORDER BY Salary ASC;
+
+16. Write a query to insert new data in Table EmployeeInfo
+
+	INSERT INTO EmployeeInfo VALUES (6,'Puspanathan','G','Manager','P4','Mumbai(BOM)','13/10/2000','M');
+
+17. Write a query to delete a column from EmployeePosition table where employee position is equal to Lead
+
+	DELETE FROM EmployeePosition WHERE EmpPosition = 'Lead';
+
+19. Write query for FULL OUTER JOIN
+
+	SELECT d.date, i.name, i.is_veg, d.price, d.units_sold
+	FROM daily_menu d
+	FULL OUTER JOIN menu_items i ON d.item_id = i.item_id;
+
+20. Write query for RIGHT JOIN
+
+	SELECT d.date, i.name, i.is_veg, d.price, d.units_sold
+	FROM daily_menu d
+	RIGHT JOIN menu_items i ON d.item_id = i.item_id;
+
+22. Write an SQL query to find the maximum, minimum, and average salary of the employees
+	
+	SELECT MAX(Salary), AVG(Salary), MIN(Salary) FROM EmployeeSalary;
+
+23. Write an SQL query to fetch the EmpIds that are present in both the tables – ‘EmployeeDetails’ and ‘EmployeeSalary
+
+	SELECT EmpId FROM EmployeeDetails UNION
+	SELECT EmpId FROM EmployeeSalary;
+
+24. Write an SQL query to find the count of the total occurrences of a particular character – ‘n’ in the FullName field
+
+	SELECT FullName, 
+	LENGTH(FullName) - LENGTH(REPLACE(FullName),'n'))
+	FROM EmployeeDetails;
+
+25. Write an SQL query to fetch employee names having a salary greater than or equal to 5000 and less than or equal to 10000
+
+	SELECT FullName, Salary FROM EmployeeSalary
+	WHERE Salary >=5000 AND Salary<=10000;
+
+26. Write an SQL query to fetch project-wise count of employees sorted by project’s count in descending order
+
+	SELECT Project, COUNT(EmpId) EmpProjectCount FROM EmployeeSalary 
+	GROUP BY Project
+	ORDER BY EmpProjectCount DESC;
+
+27. Write an SQL query to fetch duplicate records from EmployeeDetails (without considering the primary key – EmpId)
+
+	SELECT FullName, ManagerId, DateOfJoining, City, COUNT(*)
+	FROM EmployeeDetails
+	GROUP BY FullName, ManagerId, DateOfJoining, City
+	HAVING COUNT(*) > 1;
